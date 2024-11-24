@@ -2,7 +2,7 @@
 
 namespace base{
     namespace XString{
-        inline char* LTrim(char* str, const char cc = ' ')
+        char* LTrim(char* str, const char cc )
         {
             if (str == nullptr || *str == '\0')  return nullptr;
             char* p = str;
@@ -15,14 +15,14 @@ namespace base{
             return str;
         }
 
-        inline std::string& LTrim(std::string& str, const char cc = ' ')
+        std::string& LTrim(std::string& str, const char cc )
         {
             auto pos = str.find_first_not_of(cc);   //从左往右找到第一个不是cc的字符的位置，没找到则是0
             if (pos != 0) str.replace(0, pos, "");
             return str;
         }
 
-        inline char* RTrim(char* str, const char cc)
+        char* RTrim(char* str, const char cc)
         {
             if (str == nullptr || *str == '\0') return nullptr;
             size_t len = strlen(str);
@@ -34,7 +34,7 @@ namespace base{
             return str;
         }
 
-        inline std::string& RTrim(std::string& str, const char cc)
+        std::string& RTrim(std::string& str, const char cc)
         {
             auto pos = str.find_last_not_of(cc);
             if (pos != std::string::npos)
@@ -42,7 +42,7 @@ namespace base{
             return str;
         }
 
-        inline char* ToUpper(char* str)
+        char* ToUpper(char* str)
         {
             if (str == nullptr) return nullptr;
 
@@ -55,7 +55,7 @@ namespace base{
             return str;
         }
 
-        inline std::string& ToUpper(std::string& str)
+        std::string& ToUpper(std::string& str)
         {
             for (auto &cc:str)
             {
@@ -64,7 +64,7 @@ namespace base{
             return str;
         }
 
-        inline char* ToLower(char* str)
+        char* ToLower(char* str)
         {
             if (str == nullptr) return nullptr;
             char *p = str;
@@ -76,7 +76,7 @@ namespace base{
             return str;
         }
 
-        inline std::string& ToLower(std::string& str)
+        std::string& ToLower(std::string& str)
         {
             for (auto& cc:str)
             {
@@ -132,7 +132,7 @@ namespace base{
                     str.push_back(cc);
                     continue;
                 }
-                if ( (bdot) || (cc == '.'))
+                if ( (bdot) && (cc == '.'))
                 {
                     str.push_back(cc);
                     continue;
