@@ -7,8 +7,10 @@
 #include"../stdafx.h"
 
 
-namespace base{
-    namespace XString{
+namespace base
+{
+    namespace XString
+    {
         /**
          * @brief:删除字符串左边的指定字符
          * @str:    c/c++风格字符串
@@ -61,6 +63,42 @@ namespace base{
         char* PickNumber(const std::string& src, char* dest, const bool bsigned = false, const bool bdot = false);
         std::string& PickNumber(const std::string& src, std::string* dest,  const bool bsigned = false, const bool bdot = false);
         std::string  PickNumber(const std::string &src,const bool bsigned=false,const bool bdot=false);
-    }
+
+        /**
+         * @str:        被分割字符串
+         * @dest:       分割后保存的字符串容器
+         * @delimiter:  分割的标志（字符）
+         */
+        std::vector<std::string>& Split(const std::string& str, std::vector<std::string>& dest, const std::string& delimiter);
+        std::vector<std::string> Split(const std::string& str, const std::string& delimiter);
+
+        /**
+         * @brief: C++格式化输出函数模版 example：("这是第 %d 个程序，程序名是%s", num, str)
+         */
+        template< typename... Args >
+        bool StrFormat(string &str,const char* fmt, Args... args ) 
+        {
+            int len = snprintf( nullptr, 0, fmt, args... );      // 得到格式化输出后字符串的总长度。
+            if (len < 0) return false;                                  // 如果调用snprintf失败，返回-1。
+            if (len == 0) { str.clear(); return true; }            // 如果调用snprintf返回0，表示格式化输出的内容为空。
+
+            str.resize(len);                                                 // 为string分配内存。
+            snprintf(&str[0], len + 1, fmt, args... );           // linux平台第二个参数是len+1，windows平台是len。
+            return true;
+        }
+        template< typename... Args >
+        string StrFormat(const char* fmt, Args... args ) 
+        {
+            string str;
+
+            int len = snprintf( nullptr, 0, fmt, args... );      // 得到格式化后字符串的长度。
+            if (len < 0) return str;              // 如果调用snprintf失败，返回-1。
+            if (len == 0) return str;           // 如果调用snprintf返回0，表示格式化输出的内容为空。;
+
+            str.resize(len);                                                // 为string分配内存。
+            snprintf(&str[0], len + 1, fmt, args... );          // linux平台第二个参数是len+1，windows平台是len。
+            return str;
+        }    
+    } 
 }
 #endif

@@ -152,5 +152,25 @@ namespace base{
             return dest;
         }
 
+        std::vector<std::string>& Split(const std::string& str, std::vector<std::string>& dest, const std::string& delimiter)
+        {
+            if (str.length() == 0 || delimiter.length() == 0)
+                return dest;
+            size_t  start = 0, end = 0;
+            while ( (end = str.find(delimiter, start)) != std::string::npos)
+            {
+                dest.push_back(str.substr(start, end - start));
+                start = end + delimiter.length();
+            }
+            dest.push_back(str.substr(start));
+            return dest;
+        }
+
+        std::vector<std::string> Split(const std::string& str, const std::string& delimiter)
+        {
+            std::vector<std::string> temp;
+            Split(str, temp, delimiter);
+            return temp;
+        }
     }
 }

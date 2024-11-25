@@ -23,7 +23,7 @@ char *deletelchr(char* str, const int cc)
 
 string& deletelchr(string &str, const int cc)
 {
-    auto pos=str.find_first_not_of(cc);    // 从字符串的左边查找第一个不是cc的字符的位置。
+    auto pos=str.                                                                                                                                                          (cc);    // 从字符串的左边查找第一个不是cc的字符的位置。
 
     if (pos!= 0) str.replace(0,pos,"");       // 把0-pos之间的字符串替换成空。
 
@@ -39,12 +39,12 @@ char* deleterchr(char *str,const int cc)
 
     while (*p != 0)			   // 遍历字符串。
     {
-        if (*p == cc && piscc == 0) piscc = p;		  // 记下字符cc的第一个位置。
+        if (*p == cc && piscc == 0) piscc = p;		  // 记下字符cc的第一个位置。                        
         if (*p != cc) piscc = 0;								  // 只要当前字符不是cc，清空piscc。
         p++;		
 	  }
 
-	  if (piscc != 0) *piscc = 0;	// 把piscc位置的字符置为0，表示字符串已结束。
+	  if (piscc != 0) *piscc = 0;	// 把piscc位置的字符置为0，表示字符串已结束。                    
 
     return str;
 }
